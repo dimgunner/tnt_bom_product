@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- stock.view_picking_form button_validate_bom -->
+        <record id="view_stock_picking_form" model="ir.ui.view">
+            <field name="name">stock.picking.form.button_validate_bom</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='do_print_picking']" position="before">
+                    <button name="button_validate_bom"
+                            attrs="{'invisible': ['|', ('state', 'in', ('waiting','confirmed')), ('show_validate', '=', False)]}"
+                            string="Validate and Create BOM Products" type="object" class="oe_highlight"
+                            groups="stock.group_stock_user"/>
+                    <button name="button_validate_bom"
+                            attrs="{'invisible': ['|', ('state', 'not in', ('waiting', 'confirmed')), ('show_validate', '=', False)]}"
+                            string="Validate and Create BOM Products" type="object" groups="stock.group_stock_user"
+                            class="o_btn_validate"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
