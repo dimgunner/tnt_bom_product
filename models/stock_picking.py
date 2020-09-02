@@ -22,7 +22,7 @@ class Picking(models.Model):
             if product_id:
                 for bom in product_id.bom_ids[:1]:
                     for i, bom_line in enumerate(bom.bom_line_ids):
-                        bom_line.product_id.copy({
+                        bom_line.product_id.sudo().copy({
                             'name': '{} ({}#{:02d})'.format(bom_line.product_id.name, product.get('lot_name'), i + 1),
                             'default_code': bom_line.product_id.default_code,
                         })
